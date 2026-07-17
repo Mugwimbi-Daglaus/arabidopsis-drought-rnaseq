@@ -72,8 +72,8 @@ Alignment rate: 98.74-99.25% across all samples.
 ## Author
 **Daglaus Mugwimbi**
 - GitHub: [Mugwimbi-Daglaus](https://github.com/Mugwimbi-Daglaus)
-- Institution: Institute of Botany, CAS, UCAS | TRIDI, Uganda
-- Research: Plant stress genomics — Arabidopsis drought and Sorghum nitrogen transcriptomics
+- Institution: Institute of Botany-CAS, UCAS
+- Research: Plant stress genomics and transcriptomics
 
 ## License
 MIT License
