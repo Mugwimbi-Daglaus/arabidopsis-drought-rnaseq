@@ -14,16 +14,16 @@ Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 - **Sequencing:** Illumina HiSeq, Paired-end
 
 ## Pipeline Steps
-1. **Download** — fasterq-dump (NCBI SRA)
-2. **Quality Control & Trimming** — fastp
-3. **Genome Indexing** — HISAT2 (TAIR10 genome)
-4. **Alignment** — HISAT2
-5. **Read Counting** — featureCounts
-6. **Differential Expression** — DESeq2
-7. **Visualization** — ggplot2, pheatmap
-8. **GO Enrichment** — clusterProfiler, org.At.tair.db
-9. **Co-expression Network** — WGCNA
-10. **Hub Gene Network** — ggraph
+1. **Download** - fasterq-dump (NCBI SRA)
+2. **Quality Control & Trimming** - fastp
+3. **Genome Indexing** - HISAT2 (TAIR10 genome)
+4. **Alignment** - HISAT2
+5. **Read Counting** - featureCounts
+6. **Differential Expression** - DESeq2
+7. **Visualization** - ggplot2, pheatmap
+8. **GO Enrichment** - clusterProfiler, org.At.tair.db
+9. **Co-expression Network** - WGCNA
+10. **Hub Gene Network** - ggraph
 
 ## Key Results
 - 25,723 genes analyzed
