@@ -1,51 +1,79 @@
 # Arabidopsis Drought Stress RNA-seq Analysis
 
 ## Overview
-This project performs a complete RNA-seq differential expression analysis 
-of Arabidopsis thaliana drought stress response using both Galaxy 
-and Linux (Ubuntu WSL2) pipelines.
+This project performs a complete RNA-seq transcriptomics analysis of 
+*Arabidopsis thaliana* drought stress response using both Galaxy and 
+Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 
 ## Dataset
 - **GEO Accession:** GSE119382
-- **Organism:** Arabidopsis thaliana (TAIR10)
+- **BioProject:** PRJNA490054
+- **Organism:** *Arabidopsis thaliana* (TAIR10)
 - **Conditions:** Drought stress vs Control
 - **Replicates:** 3 biological replicates per condition
+- **Sequencing:** Illumina HiSeq, Paired-end
 
 ## Pipeline Steps
-1. Quality Control — FastQC
-2. Trimming — Trimmomatic
-3. Alignment — HISAT2 (TAIR10 genome)
-4. Read Counting — featureCounts
-5. Differential Expression — DESeq2
-6. GO Enrichment Analysis
+1. **Download** — fasterq-dump (NCBI SRA)
+2. **Quality Control & Trimming** — fastp
+3. **Genome Indexing** — HISAT2 (TAIR10 genome)
+4. **Alignment** — HISAT2
+5. **Read Counting** — featureCounts
+6. **Differential Expression** — DESeq2
+7. **Visualization** — ggplot2, pheatmap
+8. **GO Enrichment** — clusterProfiler, org.At.tair.db
+9. **Co-expression Network** — WGCNA
+10. **Hub Gene Network** — ggraph
 
 ## Key Results
-- 25,726 genes analyzed
-- 2,625 upregulated in drought
-- 1,845 downregulated in drought
-- 1,425 highly significant drought-responsive genes
+- 25,723 genes analyzed
+- 2,621 upregulated in drought
+- 1,840 downregulated in drought
+- 1,427 highly significant drought-responsive genes (padj < 0.05, |LFC| > 1)
+- 32 WGCNA co-expression modules identified
+- Key modules: Brown (downregulated, r=-0.97) and Turquoise (upregulated, r=+0.89)
+- Top GO term: Response to water deprivation (GO:0009414)
+- Top KEGG pathway: ABA signaling
 
 ## Tools Used
-- FastQC v0.12.1
-- Trimmomatic v0.40
-- HISAT2 v2.2.2
-- SAMtools v1.19.2
-- featureCounts v2.1.1
-- DESeq2
-- R v4.3.1
+| Tool | Version | Purpose |
+|------|---------|---------|
+| fasterq-dump | 3.4.1 | Download raw data |
+| fastp | 1.3.6 | QC + Trimming |
+| HISAT2 | 2.2.2 | Alignment |
+| SAMtools | 1.19.2 | BAM processing |
+| featureCounts | 2.1.1 | Read counting |
+| DESeq2 | Bioconductor | Differential expression |
+| WGCNA | CRAN | Co-expression network |
+| ggraph | CRAN | Network visualization |
+| clusterProfiler | Bioconductor | GO/KEGG enrichment |
+| R | 4.5.3 | Statistical analysis |
 
 ## Repository Structure
-├── Scripts/     # Pipeline scripts
-├── Results/     # Output files and plots
-├── README.md    # Project documentation
-└── LICENSE      # MIT License
+## How to Run
+```bash
+# Activate environment
+conda activate plantgenomics
+
+# Run pipeline step by step
+bash Scripts/01_download.sh
+bash Scripts/02_fastp_trimming.sh
+bash Scripts/03_genome_index.sh
+bash Scripts/04_alignment.sh
+bash Scripts/05_featurecounts.sh
+Rscript Scripts/06_deseq2_wgcna_analysis.R
+```
+
+## Reproducibility
+This analysis was run on both Galaxy platform and Linux command line
+(Ubuntu WSL2), confirming reproducibility of results across both platforms.
+Alignment rate: 98.74-99.25% across all samples.
 
 ## Author
 **Daglaus Mugwimbi**
-- GitHub: Mugwimbi-Daglaus
-- Email: mugwimbi.daglaus@gmail.com
+- GitHub: [Mugwimbi-Daglaus](https://github.com/Mugwimbi-Daglaus)
+- Institution: Institute of Botany, CAS, UCAS | TRIDI, Uganda
+- Research: Plant stress genomics — Arabidopsis drought and Sorghum nitrogen transcriptomics
 
-## Reproducibility
-This analysis was run on both Galaxy platform and Linux 
-command line confirming reproducibility of results across 
-both platforms.
+## License
+MIT License
