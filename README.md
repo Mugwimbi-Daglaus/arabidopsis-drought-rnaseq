@@ -11,10 +11,10 @@ Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 - **Organism:** *Arabidopsis thaliana* (TAIR10)
 - **Conditions:** Drought stress vs Control
 - **Replicates:** 3 biological replicates per condition
-- **Sequencing:** Illumina HiSeq, Paired-end
+- **Sequencing:** Illumina HiSeq, Single-end
 
 ## Pipeline Steps
-1. **Download** - fasterq-dump (NCBI SRA)
+1. **Download** - SRA Toolkit (fasterq-dump)
 2. **Quality Control & Trimming** - fastp
 3. **Genome Indexing** - HISAT2 (TAIR10 genome)
 4. **Alignment** - HISAT2
@@ -26,14 +26,20 @@ Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 10. **Hub Gene Network** - ggraph
 
 ## Key Results
-- 25,723 genes analyzed
-- 2,621 upregulated in drought
-- 1,840 downregulated in drought
-- 1,427 highly significant drought-responsive genes (padj < 0.05, |LFC| > 1)
-- 32 WGCNA co-expression modules identified
+- 25,727 genes analyzed
+- 2,616 upregulated in drought
+- 1,844 downregulated in drought
+- 1,421 highly significant drought-responsive genes (padj < 0.05, |LFC| > 1)
+- 35 WGCNA co-expression modules identified
 - Key modules: Brown (downregulated, r=-0.97) and Turquoise (upregulated, r=+0.89)
-- Top GO term: Response to water deprivation (GO:0009414)
-- Top KEGG pathway: ABA signaling
+
+## Functional Enrichment
+  Top GO biological processes:
+- Regulation of transcription, DNA-templated (GO:0006355)
+- Response to abscisic acid (GO:0009737)
+- Response to water deprivation (GO:0009414)
+- Response to cold (GO:0009409)
+- Response to salt stress (GO:0009651)
 
 ## Tools Used
 | Tool | Version | Purpose |
@@ -56,18 +62,28 @@ Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 conda activate plantgenomics
 
 # Run pipeline step by step
-bash Scripts/01_download.sh
-bash Scripts/02_fastp_trimming.sh
-bash Scripts/03_genome_index.sh
-bash Scripts/04_alignment.sh
-bash Scripts/05_featurecounts.sh
-Rscript Scripts/06_deseq2_wgcna_analysis.R
+bash scripts/01_download.sh
+bash scripts/02_fastp_trimming.sh
+bash scripts/03_genome_index.sh
+bash scripts/04_alignment.sh
+bash scripts/05_featurecounts.sh
+Rscript scripts/06_deseq2_wgcna_analysis.R
 ```
 
 ## Reproducibility
-This analysis was run on both Galaxy platform and Linux command line
-(Ubuntu WSL2), confirming reproducibility of results across both platforms.
-Alignment rate: 98.74-99.25% across all samples.
+This analysis was performed using both Galaxy and Linux command line
+(Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
+
+All six RNA-seq samples showed high alignment efficiency using HISAT2:
+
+- SRR7779219: 98.60%
+- SRR7779220: 99.04%
+- SRR7779221: 99.03%
+- SRR7779225: 98.91%
+- SRR7779226: 99.14%
+- SRR7779227: 99.12%
+
+Overall alignment rate ranged from 98.60% to 99.14%.
 
 ## Author
 **Daglaus Mugwimbi**
