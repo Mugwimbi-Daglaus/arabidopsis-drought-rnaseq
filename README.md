@@ -31,7 +31,7 @@ Linux (Ubuntu WSL2) pipelines, confirming reproducibility across platforms.
 - 1,844 downregulated in drought
 - 1,421 highly significant drought-responsive genes (padj < 0.05, |LFC| > 1)
 - 35 WGCNA co-expression modules identified
-- Key modules: Brown (downregulated, r=-0.97) and Turquoise (upregulated, r=+0.89)
+- Key modules: Yellow (downregulated, r=-0.93) and Turquoise (upregulated, r=+0.93)
 
 ## Functional Enrichment
   Top GO biological processes:
